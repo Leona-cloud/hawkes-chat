@@ -29,4 +29,12 @@ export class MessageService {
       .populate('reciever_id', 'user_name phone_number display_picture')
       .exec();
   }
+
+  async getMessagesForAGroup(group_id: string): Promise<Message[]> {
+    return await this.messageModel
+      .find({ group_id: group_id })
+      .populate('sender_id', 'user_name, phone_number')
+      .sort({ createdAt: 1 })
+      .exec();
+  }
 }

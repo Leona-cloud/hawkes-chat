@@ -15,4 +15,9 @@ export class MessageController {
   async retrieveUserMessages(@Param('id') id: string) {
     return await this.messageService.retrieveUserMessages(id);
   }
+
+  @Get('group/:group_id')
+  async getMessagesForGroup(@Param('group_id') group_id: string) {
+    return await this.messageService.getMessagesForAGroup(group_id);
+  }
 }
