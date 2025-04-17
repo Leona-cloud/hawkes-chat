@@ -1,0 +1,21 @@
+import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
+import { MongooseModule } from '@nestjs/mongoose';
+import { UserModule } from './users/user.module';
+import { MessageModule } from './messages/message.module';
+import { GroupModule } from './groups/group.module';
+
+@Module({
+  imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
+    MongooseModule.forRoot(process.env.DB_CONNECT as string),
+    UserModule,
+    MessageModule,
+    GroupModule,
+  ],
+  controllers: [],
+  providers: [],
+})
+export class AppModule {}
