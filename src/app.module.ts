@@ -4,6 +4,8 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { UserModule } from './users/user.module';
 import { MessageModule } from './messages/message.module';
 import { GroupModule } from './groups/group.module';
+import { ChatModule } from './chats/chat.module';
+import { ChatGateway } from './chats/chat.gateway';
 
 @Module({
   imports: [
@@ -14,8 +16,9 @@ import { GroupModule } from './groups/group.module';
     UserModule,
     MessageModule,
     GroupModule,
+    ChatModule
   ],
   controllers: [],
-  providers: [],
+  providers: [ChatGateway],
 })
 export class AppModule {}
