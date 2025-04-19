@@ -8,7 +8,6 @@ import { ChatGateway } from 'src/chats/chat.gateway';
 export class MessageService {
   constructor(
     @InjectModel(Message.name) private messageModel: Model<MessageDocument>,
-    private chatGateway: ChatGateway,
   ) {}
 
   async sendMessage(messageData: Partial<Message>): Promise<Message> {
@@ -16,16 +15,16 @@ export class MessageService {
 
     const savedMessage = await newMessage.save();
 
-    if (messageData.group_id) {
-      console.log('babe')
-      this.chatGateway.server
-        .to(messageData.group_id)
-        .emit('new_message', savedMessage);
-    } else if (messageData.reciever_id) {
-      this.chatGateway.server
-        .to(`user:${messageData.reciever_id}`)
-        .emit('new_private_message', savedMessage);
-    }
+    // if (messageData.group_id) {
+    //   console.log('babe')
+    //   this.chatGateway.server
+    //     .to(messageData.group_id)
+    //     .emit('new_message', savedMessage);
+    // } else if (messageData.reciever_id) {
+    //   this.chatGateway.server
+    //     .to(`user:${messageData.reciever_id}`)
+    //     .emit('new_private_message', savedMessage);
+    // }
 
     return savedMessage;
   }

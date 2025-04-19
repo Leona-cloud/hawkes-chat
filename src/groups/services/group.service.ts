@@ -7,11 +7,14 @@ import { Model } from 'mongoose';
 export class GroupService {
   constructor(
     @InjectModel(Group.name) private groupModel: Model<GroupDocument>,
+
   ) {}
 
-  async createGroup(groupData: Partial<Group>): Promise<Group> {
+  async createGroup(groupData: Partial<Group>): Promise<GroupDocument> {
     const newGroup = new this.groupModel(groupData);
-    return await newGroup.save();
+    const group = await newGroup.save();
+
+    return group;
   }
 
   async addMember(group_id: string, user_id: string): Promise<Group | null> {
